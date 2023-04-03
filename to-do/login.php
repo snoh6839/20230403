@@ -123,11 +123,59 @@
             <?php
             if (isset($login_error)) {
                 echo "<div class='error'>$login_error</div>";
+                echo "<a href='login.php'>다시 시도</a>";
             } elseif (isset($_SESSION['username'])) {
                 echo "<div class='success'>Welcome, {$_SESSION['username']}!</div>";
             }
             ?>
         </div>
+    </div>
 </body>
+<?php
+session_start();
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = $_POST["username"];
+    $password = $_POST["password"];
+
+    // DB 연결 정보
+    $servername = "localhost";
+    $db_username = "your_username";
+    $db_password = "your_password";
+    $dbname = "your_database_name";
+
+    try {
+        // PDO 객체 생성
+        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $db_username, $db_password);
+
+        // PDO 예외 처리 모드 설정
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        // 쿼리 실행
+        $stmt = $conn->prepare("SELECT * FROM users WHERE username=:username AND password=:password");
+        $stmt->bindParam(":username", $username);
+        $stmt->bindParam(":password", $password);
+        $stmt->execute();
+
+        // 결과 확인
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($result) {
+            $_SESSION["username"] = $result["username"];
+            header("Location: success.php");
+            exit();
+        } else {
+            $login_error = "Invalid username or password.";
+        }
+    } catch(PDOException $e) {
+        echo "Error: " . $e->getMessage();
+    }
+
+    // 연결 종료
+    $conn = null;
+}
+?>
 
 </html>
+
+
+
