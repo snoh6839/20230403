@@ -1,7 +1,7 @@
 <?php
 
 //함수만들기
-function execute_query($sql)
+function dbconn_query($sql)
 {
     $dbc = mysqli_connect("localhost", "root", "root506", "employees", 3306);
     $result = mysqli_query($dbc, $sql);
@@ -23,16 +23,16 @@ function execute_query($sql)
 }
 
 // 함수 사용 예시
-$sql = "SELECT emp_no, concat(last_name, ' ' , first_name) as full_name, gender, birth_date FROM employees Where emp_no <= 10005;";
-$result = execute_query($sql);
+// $sql = "SELECT emp_no, concat(last_name, ' ' , first_name) as full_name, gender, birth_date FROM employees Where emp_no <= 10005;";
+// $result = execute_query($sql);
 
-if ($result) {
-    foreach ($result as $row) {
-        echo "emp_no: " . $row["emp_no"] . " full_name: " . $row["full_name"] . " gender: " . $row["gender"] . " birth_date: " . $row["birth_date"] . "\n";
-    }
-} else {
-    echo "0 results";
-}
+// if ($result) {
+//     foreach ($result as $row) {
+//         echo "emp_no: " . $row["emp_no"] . " full_name: " . $row["full_name"] . " gender: " . $row["gender"] . " birth_date: " . $row["birth_date"] . "\n";
+//     }
+// } else {
+//     echo "0 results";
+// }
 
 // // //함수를 재사용 가능하고 유지보수가 용이하도록 개선함
 // // //db연결 함수

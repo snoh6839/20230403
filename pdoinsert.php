@@ -1,5 +1,5 @@
 <?php
-function execute_query($sql, $params) {
+function execute_query($sql, $inparams) {
     $db_host = "localhost";
     $db_user = "root";
     $db_password = "root506";
@@ -16,24 +16,18 @@ function execute_query($sql, $params) {
     $obj_con = new PDO( $db_dns, $db_user, $db_password, $db_option );
     
     $stmt = $obj_con->prepare($sql);
-    $stmt->execute($params);
-    $result = $stmt->fetchAll();
+    $stmt->execute($inparams);
+    $result = $obj_con->commit();
 
+    $obj_con = null;
     
     return $result;
-    $obj_con = null;
 }
 
-// $sql = "SELECT dept_no, dept_name FROM departments where dept_no = :dept_no";
-// $params = array(":dept_no" => "d002");
+// $sql = "SELECT dept_no, dept_name FROM departments where dept_no = ':dept_no' and dept_name = ':dept_name'";
+// $params = array(":dept_no" => "d011", ":dept_name" => "PHP풀스택");
 
 // $result = execute_query($sql, $params);
-
-// // var_dump($result);
-
-// foreach($result as $val){
-//     echo "dept_no : ".$val["dept_no"] . " dept_name : " . $val["dept_name"];
-// }
 
 //
 // class Database {
