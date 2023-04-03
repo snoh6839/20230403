@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>할 일 목록</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>할 일 목록</h1>
+
+    <div class="container">
+        <table>
+            <thead>
+                <tr>
+                    <th>제목</th>
+                    <th>내용</th>
+                    <th>작성일</th>
+                    <th>마감일</th>
+                    <th>수정</th>
+                    <th>삭제</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 할 일 목록이 여기에 들어갑니다. -->
+            </tbody>
+        </table>
+
+        
+        <button id="add-task-btn">Add Task</button>
+
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Add Task</h2>
+                <form id="add-task-form">
+                    <label for="title">Title:</label>
+                    <input type="text" id="title" name="title">
+                    <label for="description">Description:</label>
+                    <textarea id="description" name="description"></textarea>
+                    <label for="due-date">Due Date:</label>
+                    <input type="date" id="due-date" name="due-date">
+                    <button type="submit">Add</button>
+                    <button type="button" class="cancel">Cancel</button>
+                </form>
+            </div>
+        
+
+        <form>
+            <h2>할 일 수정</h2>
+            <label for="edit-title">제목:</label>
+            <input type="text" id="edit-title" name="edit-title" required>
+
+            <label for="edit-content">내용:</label>
+            <input type="text" id="edit-content" name="edit-content" required>
+
+            <label for="edit-deadline">마감일:</label>
+            <input type="date" id="edit-deadline" name="edit-deadline" required>
+
+            <button type="submit">수정</button>
+        </form>
+    </div>
+
+</body>
+
+</html>
