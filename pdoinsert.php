@@ -1,3 +1,4 @@
+<?php
 function execute_query($sql, $params) {
     $db_host = "localhost";
     $db_user = "root";
@@ -23,16 +24,17 @@ function execute_query($sql, $params) {
     return $result;
 }
 
-$sql = "SELECT e.emp_no, e.birth_date, s.salary
-        FROM employees e
-        INNER JOIN salaries s
-        ON e.emp_no = s.emp_no
-        WHERE (e.emp_no = :emp1 or e.emp_no = :emp2)
-        AND s.to_date = '9999-01-01'";
-$params = array(":emp1" => 10001, ":emp2" => 10002);
+$sql = "INSERT INTO departments(
+    dept_no,
+    dept_name
+)
+    VALUES(
+    :dept_no,
+    :dept_name
+    )";
+$params = array(":dept_no" => "d011", ":dept_name" => "PHP풀스택");
 
 $result = execute_query($sql, $params);
 
-foreach ( $result as $val ) {
-    echo "emp_no : " . $val["emp_no"] ." " . "birth_date : " . $val["birth_date"]. " " . "salary : ".$val["salary"]."\n";
-}
+
+?>
