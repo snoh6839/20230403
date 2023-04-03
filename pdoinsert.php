@@ -36,6 +36,7 @@ $params = array(":dept_no" => "d011", ":dept_name" => "PHP풀스택");
 
 $result = execute_query($sql, $params);
 
+//
 class Database {
     private $db_host = "localhost";
     private $db_user = "root";
