@@ -1,6 +1,6 @@
 <?php
 include_once("./dbconnectfunc.php");
-$sql = "SELECT floor(AVG(salary)) FROM salaries WHERE to_date = '9999-01-01'";
+$sql = "SELECT floor(AVG(salary)) as avg_sal FROM salaries WHERE to_date = '9999-01-01'";
 
 
 $result = dbconn_query($sql);
@@ -9,7 +9,7 @@ $result = dbconn_query($sql);
 
 
 foreach ($result as $val) {
-    echo "평균 연봉 : " . $val["floor(AVG(salary))"];
+    echo "평균 연봉 : " . $val["avg_sal"];
 }
 
 include_once("./pdoinsert.php");
@@ -20,8 +20,8 @@ include_once("./pdoinsert.php");
 
 // $result = execute_query($sql, $inparams);
 
-// $sql = "UPDATE employees SET first_name=:first_name, last_name=:last_name WHERE emp_no = 500001";
-// $inparams = array(":first_name" => '길동', ":last_name" => '홍');
+// $sql = "UPDATE employees SET first_name=:first_name, last_name=:last_name WHERE emp_no = :emp_no";
+// $inparams = array(":first_name" => '길동', ":last_name" => '홍', ":emp_no" => 500001);
 // $result = execute_query($sql, $inparams);
 
 // $sql = "DELETE FROM employees  WHERE emp_no = :emp_no";
